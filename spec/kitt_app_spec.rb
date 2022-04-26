@@ -1,9 +1,9 @@
 require 'kitt_app'
 
-describe GetPrice do
+describe KittApp do
+  let(:kitt_app) { KittApp.new }
   
-  
-
+    it { is_expected.to respond_to(:get_price).with(1).argument }
 
 end
 
