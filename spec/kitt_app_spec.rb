@@ -12,7 +12,10 @@ describe KittApp do
       it 'calculates the cheapest rate when given a duration in minutes' do
         kitt_app
 
-
+        
+        expect(kitt_app.get_price(5)).to eq(10)
+        expect(kitt_app.get_price(11)).to eq(22)
+        expect(kitt_app.get_price(60)).to eq(22)
         expect(kitt_app.get_price(120)).to eq(44)
         expect(kitt_app.get_price(180)).to eq(60)
         expect(kitt_app.get_price(1440)).to eq(60)
@@ -50,5 +53,5 @@ end
 
 # edge cases
 
-# What happens if duration is blank
+# What happens if duration is blank?
 # What happens if duration is in secs/hours/days/weeks?

@@ -28,15 +28,15 @@ class KittApp
     @final_price = @day_price + @week_price
   #end
 
-    elsif minutes < 10080 && minutes >= 1440
-      days = minutes / 1440.to_f
-        if days >= 1.75 && days <= 5
-          day_price = 105
-        else
-          day_price = days*60
-        end
-          final_price = day_price
-    
+      elsif minutes < 10080 && minutes >= 1440
+        days = minutes / 1440.to_f
+          if days >= 1.75 && days <= 5
+            day_price = 105
+          else
+            day_price = days*60
+          end
+            final_price = day_price
+      
 
 
     elsif minutes < 1440 && minutes >= 60
@@ -47,7 +47,19 @@ class KittApp
           hour_price = hours*22
         end
           final_price = hour_price
-    else
+
+
+
+    elsif minutes < 60 && minutes >= 0
+            if minutes >= 11 && minutes < 60
+              minutes_price = 22.to_f
+            else
+              minutes_price = minutes*2
+            end
+              final_price = minutes_price
+
+
+      else
     end
   end
 end
@@ -74,18 +86,3 @@ end
   # 1440 minutes = £60
   # 2880 minutes = £105
   # 20160 minutes = £210
-
-
-
-
-
-      # day price
-    # if minutes < 10080 && minutes >= 1440
-    #   days = minutes / 1440.to_f
-    #   if days >= 1.75 && days <= 5
-    #     day_price = 105
-    #   else
-    #     day_price = days*60
-    #   end
-    #     final_price = day_price
-    # end
