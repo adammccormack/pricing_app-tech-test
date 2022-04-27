@@ -11,6 +11,7 @@ describe KittApp do
 
   describe '#get_price' do
     it 'calculates the cheapest rate when given a duration in minutes' do
+
       expect(kitt_app.get_price(5)).to eq(10)
       expect(kitt_app.get_price(11)).to eq(22)
       expect(kitt_app.get_price(60)).to eq(22)
@@ -18,6 +19,8 @@ describe KittApp do
       expect(kitt_app.get_price(180)).to eq(60)
       expect(kitt_app.get_price(1440)).to eq(60)
       expect(kitt_app.get_price(2880)).to eq(105)
+      expect(kitt_app.get_price(10000)).to eq(105)
+      expect(kitt_app.get_price(10080)).to eq(105)
       expect(kitt_app.get_price(20_160)).to eq(210)
     end
   end
