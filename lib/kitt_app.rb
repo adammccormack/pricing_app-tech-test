@@ -3,27 +3,23 @@
 class KittApp
   def get_price(minutes)
 
-    # week price
     if minutes >= 10080
       weeks = minutes / 10080.to_f
       @week_remainder = weeks.modulo(1)
       
       weeks_remaining = weeks - @week_remainder
       @week_price = weeks_remaining*105
+      @week_price
+
 
       @days_remaining = @week_remainder*7
       @days_remaining = @days_remaining.to_i
-      @week_price
-
       if @days_remaining >= 2 && @days_remaining <= 5
         @day_price = 105
       else
         @day_price = @days_remaining*60
       end
-  #end
-  #def final_price
     @final_price = @day_price + @week_price
-  #end
 
       elsif minutes < 10080 && minutes >= 1440
         days = minutes / 1440.to_f
