@@ -5,6 +5,20 @@ describe KittApp do
   
     it { is_expected.to respond_to(:get_price).with(1).argument }
 
+    # when I pass an argument of 1 to get_price(), I will expect an output of 2. 
+
+    describe '#get_price' do
+
+      it 'calculates the cheapest rate when given a duration in minutes' do
+        kitt_app
+
+        expect(kitt_app.get_price(1440)).to eq(60)
+        expect(kitt_app.get_price(2880)).to eq(105)
+        expect(kitt_app.get_price(20160)).to eq(210)
+      end
+
+    end
+
 end
 
 
