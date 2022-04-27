@@ -2,7 +2,7 @@
 class KittApp
   attr_accessor :week_price, :day_price, :days_remaining
 
-  def get_week_price(minutes)
+  def get_price(minutes)
 
     # week price
     if minutes >= 10080
@@ -14,22 +14,30 @@ class KittApp
 
       @days_remaining = @week_remainder*7
       @days_remaining = @days_remaining.to_i
-    end
     @week_price
-  end
-
-  def get_day_price
-
+  #end
+  #def get_day_price
     #@days_remaining = @week_remainder*7
-    if @days_remaining >= 2 && @days_remaining <= 5
-      @day_price = 105
-    else
-      @day_price = @days_remaining*60
-    end
-  end
-
-  def final_price
+      if @days_remaining >= 2 && @days_remaining <= 5
+        @day_price = 105
+      else
+        @day_price = @days_remaining*60
+      end
+  #end
+  #def final_price
     @final_price = @day_price + @week_price
+  #end
+  
+    elsif minutes < 10080 && minutes >= 1440
+      days = minutes / 1440.to_f
+        if days >= 1.75 && days <= 5
+          day_price = 105
+        else
+          day_price = days*60
+        end
+          final_price = day_price
+    else
+    end 
   end
 end
 
