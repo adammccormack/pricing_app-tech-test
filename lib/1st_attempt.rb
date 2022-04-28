@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
+require 'byebug'
+
 class GetPrice
   WEEK = 10_080
   DAY = 1440
   HOUR = 60
+  MINUTE = 1
+
+  WEEK_PRICE = 105
+  DAY_PRICE = 60
+  HOUR_PRICE = 22
+  MINUTE_PRICE = 2
 
   def initialize(week_remainder = nil, week_price = nil, day_price = nil)
     @week_remainder = week_remainder
@@ -12,22 +20,62 @@ class GetPrice
     @hour_price = hour_price
   end
 
-  def call(minutes)
-    if minutes >= WEEK
-      week_price(minutes)
-      day_price
-      @get_price = @week_price + @day_price
-    elsif minutes < WEEK && minutes >= DAY
-      day_price
-      @get_price = @day_price
-    elsif minutes < DAY && minutes >= HOUR
-      hour_price
-      @get_price = @hour_price
-    else
-      minutes < HOUR && minutes >= 0
-      minute_price
-      @get_price = @minute_price
+  # start with 12960 minutes? Yes
+  # can I deduct a weeks worth of minutes off of remainder 12960? Yes
+  # can I deduct a weeks worth of minutes off of remainder 10_080? Yes
+  # can I deduct a weeks worth of minutes from the remainder? No
+  # can I deduct a days worth of minutes from the remainder?
+  # can I deduct a hours worth of minutes from the remainder?
+  # '' minutes
+  # to 0 minutes
+
+  def call(total_minutes)
+    weeks = 0
+    days = 0
+    hours = 0
+    minutes = 0
+
+    while total_minutes.positive?
+
+      # if there are still more minutes than one week
+      # deduct 1 weeks worth of minutes
+      # then add 1 to the week count
+      if total_minutes >= WEEK
+        total_minutes -= WEEK
+        weeks += 1
+      elsif total_minutes >= DAY
+        if (total_minutes / DAY) >= 2
+          total_minutes -= WEEK
+          weeks += 1
+        else
+          total_minutes -= DAY
+          days += 1
+        end
+      elsif total_minutes >= HOUR
+        if (total_minutes / HOUR) >= 3
+          total_minutes -= DAY
+          days += 1
+        else
+          total_minutes -= HOUR
+          hours += 1
+        end
+      elsif total_minutes >= MINUTE
+        if (total_minutes / MINUTE) >= 11
+          total_minutes -= HOUR
+          hours += 1
+        else
+          total_minutes -= MINUTE
+          minutes += 1
+        end
+      end
     end
+
+    week_total = weeks * WEEK_PRICE
+    day_total = days * DAY_PRICE
+    hour_total = hours * HOUR_PRICE
+    minute_total = minutes * MINUTE_PRICE
+
+    week_total + day_total + hour_total + minute_total
   end
 
   private
