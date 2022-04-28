@@ -1,5 +1,8 @@
 class Test
 
+
+
+   # minutes >= 10080
   def week_price(minutes)
     if minutes >= 10080
       weeks = minutes / 10080.to_f
@@ -12,10 +15,13 @@ class Test
     end
   end
 
-    test = Test.new
-  p test.week_price(50400)
+    test = KittApp.new
+  p test.week_price(31680)
+  p 'f'
 
-  p 105*5
+ # 3 weeks and 1 days = 31_680 minutes
+  # should cost 315+60 = 375
+  # currently gives 315
 
   def day_price(minutes)
     if minutes < 10080 && minutes >= 1440
@@ -58,10 +64,18 @@ class Test
         final_price = minutes_price
     end
   end
+
   p test.minute_price(11)
   p test.minute_price(5)
-end
 
+
+@days_remainder = @week_remainder*7
+@minutes_remainder = @days_remainder*1440
+
+@day_price = KittApp.day_price(@minutes_remainder)
+final_price = @week_price + @day_price
+
+end
 
 
 
