@@ -1,23 +1,23 @@
+# frozen_string_literal: true
 
 require 'kitt_app'
 
-describe KittApp do
-  let(:kitt_app) { KittApp.new }
+describe GetPrice do
+  subject(:get_price) { described_class.new(minutes) }
 
-  #it { is_expected.to respond_to(:get_price).with(1).argument }
+  # it { is_expected.to respond_to(:get_price).with(1).argument }
 
   # when I pass an argument of 1 to get_price(), I will expect an output of 2.
 
   describe '#get_price' do
     it 'calculates the cheapest rate when given a duration in minutes' do
-
-      expect(kitt_app.minute_price(5)).to eq(10)
-      expect(kitt_app.minute_price(11)).to eq(22)
-      expect(kitt_app.hour_price(120)).to eq(44)
-      expect(kitt_app.hour_price(180)).to eq(60)
-      expect(kitt_app.day_price(1440)).to eq(60)
-      expect(kitt_app.day_price(2880)).to eq(105)
-      expect(kitt_app.week_price(20_160)).to eq(210)
+      expect(kitt_app.call(5)).to eq(10)
+      expect(kitt_app.call(11)).to eq(22)
+      expect(kitt_app.call(120)).to eq(44)
+      expect(kitt_app.call(180)).to eq(60)
+      expect(kitt_app.call(1440)).to eq(60)
+      expect(kitt_app.call(2880)).to eq(105)
+      expect(kitt_app.call(20_160)).to eq(210)
     end
   end
 end
