@@ -7,7 +7,7 @@ Ruby versions: 3.0.1 / 3.0.2
 
 ***Instructions***
 
-***Using GetPrice App***
+**Using GetPrice App**
 
 1. Clone the repo on Github at: https://github.com/alldigits/k_app, Github cloning instructions: https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository.
 
