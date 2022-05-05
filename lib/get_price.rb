@@ -7,7 +7,7 @@ class GetPrice
   DAY = 1440
   HOUR = 60
   MINUTE = 1
-
+  # default initialiser attributes, also optional to changing and setting attributes
   def initialize(week_price: 105, day_price: 60, hour_price: 22, minute_price: 2, day_min: 2, hour_min: 3, minute_min: 11)
     @week_price = week_price
     @day_price = day_price
@@ -17,13 +17,13 @@ class GetPrice
     @hour_min = hour_min
     @minute_min = minute_min
   end
-
+  # runs the app and tallies minutes as weeks, days etc.
   def call(total_minutes)
     weeks = 0
     days = 0
     hours = 0
     minutes = 0
-
+    # breakdowns total minutes in order of week, days, hours, minutes.
     while total_minutes.positive?
 
       if total_minutes >= WEEK
@@ -55,12 +55,12 @@ class GetPrice
         end
       end
     end
-
+    # totals each tally against its price
     week_total = weeks * week_price
     day_total = days * day_price
     hour_total = hours * hour_price
     minute_total = minutes * minute_price
-
+    # returns final price for the duration of the booking
     week_total + day_total + hour_total + minute_total
   end
 
